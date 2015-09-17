@@ -4,7 +4,7 @@ describe('cardValues', function() {
   });
 
   it("creates key/value pairs of card numbers and their blackjack values", function() {
-    expect(cardValues().get("King")).to.equal(10);
+    expect(cardValues().get("K")).to.equal(10);
   });
 });
 
@@ -14,7 +14,7 @@ describe('createSuits', function() {
   });
 
   it("contains suits", function() {
-    expect(createSuits()).to.contain("Hearts");
+    expect(createSuits()).to.contain("hearts");
   });
 });
 
@@ -28,7 +28,7 @@ describe('createDeck', function() {
   });
 
   it("contains array of card value map and suit string", function() {
-    expect(createDeck()[0]).to.eql(["Ace", "Clubs"]);
+    expect(createDeck()[0]).to.eql(["A", "clubs"]);
   });
 });
 
@@ -70,41 +70,41 @@ describe('hitMe', function() {
 
 describe('containsAce', function() {
   it("returns true if hand contains ace", function() {
-    var hand = [["Ace", "Spades"], ["King", "Diamonds"]];
+    var hand = [["A", "spades"], ["K", "diamonds"]];
     expect(containsAce(hand)).to.equal(true);
   });
 
   it("returns false if hand doesn't contain ace", function() {
-    var hand = [[2, "Spades"], ["King", "Diamonds"]];
+    var hand = [[2, "spades"], ["K", "diamonds"]];
     expect(containsAce(hand)).to.equal(false);
   });
 });
 
 describe('getScore', function() {
   it("adds values of cards in the hand", function() {
-    var hand = [[2, "Spades"], ["King", "Diamonds"]];
+    var hand = [[2, "spades"], ["K", "diamonds"]];
     expect(getScore(hand)).to.equal(12);
   });
 
   it("counts ace as 11 when not bust", function() {
-    var hand = [["Ace", "Spades"], ["King", "Diamonds"]];
+    var hand = [["A", "spades"], ["K", "diamonds"]];
     expect(getScore(hand)).to.equal(21);
   });
 
   it("counts ace as 1 when otherwise bust", function() {
-    var hand = [["Ace", "Spades"], ["King", "Diamonds"], [5, "Hearts"]];
+    var hand = [["A", "spades"], ["K", "diamonds"], [5, "hearts"]];
     expect(getScore(hand)).to.equal(16);
   });
 });
 
 describe('bust', function() {
   it("returns true when hand score is greater than 21", function() {
-    var hand = [[2, "Spades"], ["King", "Diamonds"], ["Jack", "Hearts"]];
+    var hand = [[2, "spades"], ["K", "diamonds"], ["J", "hearts"]];
     expect(bust(hand)).to.equal(true);
   });
 
   it("returns false when hand score is not greater than 21", function() {
-    var hand = [[2, "Spades"], ["King", "Diamonds"], [5, "Hearts"]];
+    var hand = [[2, "spades"], ["K", "diamonds"], [5, "hearts"]];
     expect(bust(hand)).to.equal(false);
   });
 });
@@ -112,45 +112,45 @@ describe('bust', function() {
 describe('dealerTurn', function() {
   it("hits when score is below 17", function() {
     var deck = createDeck();
-    var hand = [[2, "Spades"], ["King", "Diamonds"]];
+    var hand = [[2, "spades"], ["K", "diamonds"]];
     expect(getScore(dealerTurn(hand, deck))).to.be.above(12);
   });
 
   it("stays when score is above 17", function() {
     var deck = createDeck();
-    var hand = [[9, "Spades"], ["King", "Diamonds"]];
+    var hand = [[9, "spades"], ["K", "diamonds"]];
     expect(getScore(dealerTurn(hand, deck))).to.equal(19);
   });
 });
 
 describe('getWinner', function() {
   it("returns dealer if player is bust", function() {
-    var playerHand = [[2, "Spades"], ["King", "Diamonds"], ["Jack", "Hearts"]];
-    var dealerHand = [[10, "Clubs"], [5, "Hearts"]];
+    var playerHand = [[2, "spades"], ["K", "diamonds"], ["J", "hearts"]];
+    var dealerHand = [[10, "clubs"], [5, "hearts"]];
     expect(getWinner(dealerHand, playerHand)).to.eql(dealerHand);
   });
 
   it("returns player if dealer is bust", function() {
-    var dealerHand = [[2, "Spades"], ["King", "Diamonds"], ["Jack", "Hearts"]];
-    var playerHand = [[10, "Clubs"], [5, "Hearts"]];
+    var dealerHand = [[2, "spades"], ["K", "diamonds"], ["J", "hearts"]];
+    var playerHand = [[10, "clubs"], [5, "hearts"]];
     expect(getWinner(dealerHand, playerHand)).to.eql(playerHand);
   });
 
   it("returns player if player is closer to 21 than dealer", function() {
-    var dealerHand = [[10, "Clubs"], [5, "Hearts"]];
-    var playerHand = [[10, "Spades"], ["King", "Hearts"]];
+    var dealerHand = [[10, "clubs"], [5, "hearts"]];
+    var playerHand = [[10, "spades"], ["K", "hearts"]];
     expect(getWinner(dealerHand, playerHand)).to.eql(playerHand);
   });
 
   it("returns dealer if dealer is closer to 21 than player", function() {
-    var playerHand = [[10, "Clubs"], [5, "Hearts"]];
-    var dealerHand = [[10, "Spades"], ["King", "Hearts"]];
+    var playerHand = [[10, "clubs"], [5, "hearts"]];
+    var dealerHand = [[10, "spades"], ["K", "hearts"]];
     expect(getWinner(dealerHand, playerHand)).to.eql(dealerHand);
   });
 
   it("returns null if dealer and player have the same score", function() {
-    var playerHand = [[10, "Clubs"], ["King", "Hearts"]];
-    var dealerHand = [[10, "Spades"], ["King", "Diamonds"]];
+    var playerHand = [[10, "clubs"], ["K", "hearts"]];
+    var dealerHand = [[10, "spades"], ["K", "diamonds"]];
     expect(getWinner(dealerHand, playerHand)).to.eql(null);
   });
 

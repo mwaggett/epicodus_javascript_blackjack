@@ -1,7 +1,7 @@
 var cardValues = function() {
   var cardValues = new Map();
 
-  cardValues.set("Ace", 11);
+  cardValues.set("A", 11);
   cardValues.set(2, 2);
   cardValues.set(3, 3);
   cardValues.set(4, 4);
@@ -11,19 +11,19 @@ var cardValues = function() {
   cardValues.set(8, 8);
   cardValues.set(9, 9);
   cardValues.set(10, 10);
-  cardValues.set("Jack", 10);
-  cardValues.set("Queen", 10);
-  cardValues.set("King", 10);
+  cardValues.set("J", 10);
+  cardValues.set("Q", 10);
+  cardValues.set("K", 10);
   return cardValues;
 }
 
 var createSuits = function() {
-  var suits = ["Clubs", "Diamonds", "Hearts", "Spades"];
+  var suits = ["clubs", "diamonds", "hearts", "spades"];
   return suits;
 }
 
 var createValues = function() {
-  var values = ["Ace", 2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King"];
+  var values = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"];
   return values;
 }
 
@@ -56,14 +56,14 @@ var createHand = function(deck) {
 var hitMe = function(hand, deck) {
   var newCard = drawCard(deck);
   hand.push(newCard);
-  return hand;
+  return newCard;
 }
 
 var containsAce = function(hand) {
   var ace = false;
   for (var index in hand) {
     var card = hand[index];
-    if (card[0] === "Ace") {
+    if (card[0] === "A") {
       ace = true;
     }
   }
@@ -109,6 +109,55 @@ var getWinner = function(dealerHand, playerHand) {
 
 
 
-// $(document).ready(function() {
-//
-// });
+$(document).ready(function() {
+  $("form#play").submit(function(event) {
+
+    var deck = createDeck();
+    var player = createHand(deck);
+    var dealer = createHand(deck);
+
+    for(var index = 1; index < dealer.length; index++) {
+      var suit = dealer[index][1];
+      var value = dealer[index][0];
+      $("#dealer").append("<div class=\"card suit"+suit+"\"><p>"+value+"</p></div>");
+    }
+
+    for(var index in player) {
+      var suit = player[index][1];
+      var value = player[index][0];
+      $("#player").append("<div class=\"card suit"+suit+"\"><p>"+value+"</p></div>");
+    }
+
+    $("form#hit").submit(function(event) {
+      var newCard = hitMe(player, deck);
+      var suit = newCard[1];
+      var value = newCard[0];
+      $("#player").append("<div class=\"card suit"+suit+"\"><p>"+value+"</p></div>");
+      event.preventDefault();
+    });
+
+    $("form#stay").submit(function(event) {
+      var revealedCard = dealer[0];
+      var revealedSuit = revealedCard[1];
+      var revealedValue = revealedCard[0];
+      $("#hidden-card").replaceWith("<div class=\"card suit"+revealedSuit+"\"><p>"+revealedValue+"</p></div>");
+
+      while (getScore(dealer) < 17) {
+        var newCard = hitMe(dealer, deck);
+        var suit = newCard[1];
+        var value = newCard[0];
+        $("#dealer").append("<div class=\"card suit"+suit+"\"><p>"+value+"</p></div>");
+      }
+      event.preventDefault();
+    });
+
+    $(".new-game").show();
+    $("#play").hide();
+    event.preventDefault();
+  });
+});
+
+
+// <div class="card suithearts">
+//   <p>A</p>
+// </div>

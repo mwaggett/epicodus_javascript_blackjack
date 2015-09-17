@@ -6,6 +6,7 @@
     <script src="js/jquery-1.11.3.js"></script>
     <script src="js/scripts.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <link href="css/card-styles.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
   </head>
   <body>
@@ -16,44 +17,31 @@
     </div>
       <div class="container">
         <div class="row">
-          <div class="col-md-6" id="dealer_column">
+          <div class="col-md-6">
             <h2 class="text-center">Dealer Hand</h2>
-            <p>
-              <div class="hand">
-
-                <div class="card suitdiamonds">
-                  <p>A</p>
-                </div>
-
-                <div class="card suithearts">
-                  <p>A</p>
-                </div>
-
-                <div class="card suitclubs">
-                  <p>A</p>
-                </div>
-
-                <div class="card suitspades">
-                  <p>A</p>
-                </div>
-
+            <div class="hand new-game" id="dealer">
+              <div class="card" id="hidden-card">
+                <p>?</p>
               </div>
-            </p>
+            </div>
           </div>
           <div class="col-md-6">
             <h2 class="text-center">Player Hand</h2>
-            <p>
-              <ul>
-                <li>Ace of Spades</li>
-                <li>Two of Clubs</li>
-              </ul>
-            </p>
+            <div class="hand new-game" id="player">
 
-            <form id="hit" class="show_inline">
+              <form id="hit" class="text-center">
                 <button class="btn btn-success" type="submit">Hit Me!</button>
-            </form>
-            <form id="stay" class="show_inline">
+              </form>
+              <form id="stay" class="text-center">
                 <button class="btn btn-warning" type="submit">Stay!</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <form id="play" class="text-center">
+              <button class="btn btn-info" type="submit">Play BlackJack!</button>
             </form>
           </div>
         </div>
