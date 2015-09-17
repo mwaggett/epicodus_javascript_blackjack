@@ -31,3 +31,31 @@ describe('createDeck', function() {
     expect(createDeck()[0]).to.eql(["Ace", "Clubs"]);
   });
 });
+
+describe('drawCard', function() {
+  it("draws random card from the deck", function() {
+    expect(drawCard(createDeck())).to.be.instanceOf(Array);
+  });
+
+  it("removes top card from deck", function() {
+    var deck = createDeck();
+    drawCard(deck);
+    expect(deck.length).to.equal(51);
+  });
+});
+
+describe('createHand', function() {
+  it("picks two random cards from the deck and stores them in an array", function() {
+    expect(createHand(createDeck())).to.be.instanceOf(Array);
+  });
+
+  it("picks two random cards from the deck", function() {
+    expect(createHand(createDeck()).length).to.equal(2);
+  });
+
+  it("decreases deck by 2", function() {
+    var deck = createDeck();
+    createHand(deck);
+    expect(deck.length).to.equal(50);
+  });
+});

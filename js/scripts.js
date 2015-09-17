@@ -1,5 +1,4 @@
 var cardValues = function() {
-
   var cardValues = new Map();
 
   cardValues.set("Ace", 11);
@@ -29,7 +28,6 @@ var createValues = function() {
 }
 
 var createDeck = function() {
-  debugger;
   var suits = createSuits();
   var values = createValues();
   var deck = [];
@@ -42,9 +40,30 @@ var createDeck = function() {
   return deck;
 }
 
+var drawCard = function(deck) {
+  var randomIndex = Math.floor((Math.random() * deck.length));
+  var drawnCard = deck[randomIndex];
+  deck.splice(randomIndex, 1);
+  return drawnCard;
+}
+
+var createHand = function(deck) {
+  var firstCard = drawCard(deck);
+  var secondCard = drawCard(deck);
+  return [firstCard, secondCard];
+}
+
+var hitMe = function(hand) {
+  //add to hand
+}
+
+var player1 = createHand();
+hitMe(player1);
 
 
 
-$(document).ready(function() {
 
-});
+
+// $(document).ready(function() {
+//
+// });
