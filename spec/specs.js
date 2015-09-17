@@ -59,3 +59,18 @@ describe('createHand', function() {
     expect(deck.length).to.equal(50);
   });
 });
+
+describe('hitMe', function() {
+  it("adds a random card from the deck to the hand", function() {
+    var deck = createDeck();
+    var hand = createHand(deck);
+    expect(hitMe(hand,deck).length).to.equal(3);
+  });
+});
+
+describe('getScore', function() {
+  it("adds values of cards in the hand", function() {
+    var hand = [[2, "Spades"], ["King", "Diamonds"]];
+    expect(getScore(hand)).to.equal(12);
+  });
+});

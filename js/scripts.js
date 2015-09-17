@@ -53,12 +53,21 @@ var createHand = function(deck) {
   return [firstCard, secondCard];
 }
 
-var hitMe = function(hand) {
-  //add to hand
+var hitMe = function(hand, deck) {
+  var newCard = drawCard(deck);
+  hand.push(newCard);
+  return hand;
 }
 
-var player1 = createHand();
-hitMe(player1);
+var getScore = function(hand) {
+  var score = 0;
+  for (var index in hand) {
+    var card = hand[index];
+    var value = cardValues().get(card[0]);
+    score += value;
+  }
+  return score;
+}
 
 
 
