@@ -88,6 +88,13 @@ var bust = function(hand) {
   return score > 21;
 }
 
+var dealerTurn = function(hand, deck) {
+  while (getScore(hand) < 17) {
+    hitMe(hand, deck);
+  }
+  return hand;
+}
+
 var getWinner = function(dealerHand, playerHand) {
   if (bust(playerHand)) {
     return dealerHand;

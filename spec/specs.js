@@ -109,6 +109,20 @@ describe('bust', function() {
   });
 });
 
+describe('dealerTurn', function() {
+  it("hits when score is below 17", function() {
+    var deck = createDeck();
+    var hand = [[2, "Spades"], ["King", "Diamonds"]];
+    expect(getScore(dealerTurn(hand, deck))).to.be.above(12);
+  });
+
+  it("stays when score is above 17", function() {
+    var deck = createDeck();
+    var hand = [[9, "Spades"], ["King", "Diamonds"]];
+    expect(getScore(dealerTurn(hand, deck))).to.equal(19);
+  });
+});
+
 describe('getWinner', function() {
   it("returns dealer if player is bust", function() {
     var playerHand = [[2, "Spades"], ["King", "Diamonds"], ["Jack", "Hearts"]];
