@@ -112,13 +112,17 @@ var getWinner = function(dealerHand, playerHand) {
 
 
 $(document).ready(function() {
+  var deck;
+  var player;
+  var dealer;
+
   $("form#play").submit(function(event) {
     $("#dealer").empty();
     $("#player").empty();
 
-    var deck = createDeck();
-    var player = createHand(deck);
-    var dealer = createHand(deck);
+    deck = createDeck();
+    player = createHand(deck);
+    dealer = createHand(deck);
 
     $("#dealer").append("<div class=\"card\" id=\"hidden-card\"><p>?</p></div>");
     for(var index = 1; index < dealer.length; index++) {
@@ -133,51 +137,47 @@ $(document).ready(function() {
       $("#player").append("<div class=\"card suit"+suit+"\"><p>"+value+"</p></div>");
     }
 
-    $("form#hit").submit(function(event) {
-      var newCard = hitMe(player, deck);
-      var suit = newCard[1];
-      var value = newCard[0];
-      $("#player").append("<div class=\"card suit"+suit+"\"><p>"+value+"</p></div>");
-      if (bust(player)) {
-        $("#message").text("Bust! Dealer wins!")
-        $('#myModal').modal('show');
-      }
-      event.preventDefault();
-    });
-
-    $("form#stay").submit(function(event) {
-      var revealedCard = dealer[0];
-      var revealedSuit = revealedCard[1];
-      var revealedValue = revealedCard[0];
-      $("#hidden-card").replaceWith("<div class=\"card suit"+revealedSuit+"\"><p>"+revealedValue+"</p></div>");
-
-      while (getScore(dealer) < 17) {
-        var newCard = hitMe(dealer, deck);
-        var suit = newCard[1];
-        var value = newCard[0];
-        $("#dealer").append("<div class=\"card suit"+suit+"\"><p>"+value+"</p></div>");
-      }
-      if (bust(dealer)) {
-        $("#message").text("Bust! Player wins!");
-      } else {
-        var winner = getWinner(dealer, player);
-        if (winner !== null) {
-          $("#message").text("Bust! "+winner+" wins!");
-        } else {
-          $("#message").text("It's a tie!");
-        }
-      }
-      $('#myModal').modal('show');
-      event.preventDefault();
-    });
-
     $(".new-game").show();
     $("#play").hide();
     event.preventDefault();
   });
+
+  $("form#hit").submit(function(event) {
+    debugger;
+    var newCard = hitMe(player, deck);
+    var suit = newCard[1];
+    var value = newCard[0];
+    $("#player").append("<div class=\"card suit"+suit+"\"><p>"+value+"</p></div>");
+    if (bust(player)) {
+      $("#message").text("Bust! Dealer wins!")
+      $('#myModal').modal('show');
+    }
+    event.preventDefault();
+  });
+
+  $("form#stay").submit(function(event) {
+    var revealedCard = dealer[0];
+    var revealedSuit = revealedCard[1];
+    var revealedValue = revealedCard[0];
+    $("#hidden-card").replaceWith("<div class=\"card suit"+revealedSuit+"\"><p>"+revealedValue+"</p></div>");
+
+    while (getScore(dealer) < 17) {
+      var newCard = hitMe(dealer, deck);
+      var suit = newCard[1];
+      var value = newCard[0];
+      $("#dealer").append("<div class=\"card suit"+suit+"\"><p>"+value+"</p></div>");
+    }
+    if (bust(dealer)) {
+      $("#message").text("Bust! Player wins!");
+    } else {
+      var winner = getWinner(dealer, player);
+      if (winner !== null) {
+        $("#message").text("Bust! "+winner+" wins!");
+      } else {
+        $("#message").text("It's a tie!");
+      }
+    }
+    $('#myModal').modal('show');
+    event.preventDefault();
+  });
 });
-
-
-// <div class="card suithearts">
-//   <p>A</p>
-// </div>
