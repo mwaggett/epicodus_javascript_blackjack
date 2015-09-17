@@ -59,12 +59,26 @@ var hitMe = function(hand, deck) {
   return hand;
 }
 
+var containsAce = function(hand) {
+  var ace = false;
+  for (var index in hand) {
+    var card = hand[index];
+    if (card[0] === "Ace") {
+      ace = true;
+    }
+  }
+  return ace;
+}
+
 var getScore = function(hand) {
   var score = 0;
   for (var index in hand) {
     var card = hand[index];
     var value = cardValues().get(card[0]);
     score += value;
+  }
+  if (containsAce(hand) && score > 21) {
+    score -= 10;
   }
   return score;
 }

@@ -68,10 +68,32 @@ describe('hitMe', function() {
   });
 });
 
+describe('containsAce', function() {
+  it("returns true if hand contains ace", function() {
+    var hand = [["Ace", "Spades"], ["King", "Diamonds"]];
+    expect(containsAce(hand)).to.equal(true);
+  });
+
+  it("returns false if hand doesn't contain ace", function() {
+    var hand = [[2, "Spades"], ["King", "Diamonds"]];
+    expect(containsAce(hand)).to.equal(false);
+  });
+});
+
 describe('getScore', function() {
   it("adds values of cards in the hand", function() {
     var hand = [[2, "Spades"], ["King", "Diamonds"]];
     expect(getScore(hand)).to.equal(12);
+  });
+
+  it("counts ace as 11 when not bust", function() {
+    var hand = [["Ace", "Spades"], ["King", "Diamonds"]];
+    expect(getScore(hand)).to.equal(21);
+  });
+
+  it("counts ace as 1 when otherwise bust", function() {
+    var hand = [["Ace", "Spades"], ["King", "Diamonds"], [5, "Hearts"]];
+    expect(getScore(hand)).to.equal(16);
   });
 });
 
