@@ -172,7 +172,7 @@ $(document).ready(function() {
     } else {
       var winner = getWinner(dealer, player);
       if (winner !== null) {
-        $("#message").text("Bust! "+winner+" wins!");
+        $("#message").text(winner+" wins!");
       } else {
         $("#message").text("It's a tie!");
       }

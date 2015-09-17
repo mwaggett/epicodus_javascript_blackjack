@@ -1,27 +1,40 @@
-# Application Name
+# BlackJack
 
-##### _{Brief description of application}, {Date of current version}_
+##### _A BlackJack game written in JavaScript, 09/17/2015_
 
-#### By **Molly Waggett**
+#### By **Molly Waggett and Perry Eising**
 
 ## Description
 
-{This is a detailed description of your application. Give as much detail as needed to explain what the application does, and any other information you want users or other developers to have. Do you want other developers to use this code in their apps? Talk about things like that here in simple terms.}
+BlackJack is a blackjack game written in JavaScript. The player can choose to receive more cards, or can stay if they think they have the winning score. The score that gets closest to 21 points without going over wins. The dealer will start playing cards as soon as the player chooses to stay.
 
 ## Setup
 
 * Clone this repository.
+* Load the index.html file into a browser.
 
 ## Technologies Used
 
 * JavaScript
 * jQuery
+* CSS for the playing cards courtesy of: http://designshack.net/articles/css/css-card-tricks/
 * Mocha
 * Chai
 
+## Future Features
+
+* Close the modal and start a new game with one button.
+* Check for blackjack and alert player when they have reached 21.
+* Make hidden dealer card back pretty.
+* Make dealer hit on soft 17.
+* Make cards fan out into a hand.
+* Allow player to bet.
+* Animate hit me process (show dealer acquiring new cards one by one).
+* Support more than one player.
+
 ### Legal
 
-Copyright (c) 2015 **Molly Waggett**
+Copyright (c) 2015 **Molly Waggett and Perry Eising**
 
 This software is licensed under the MIT license.
 
