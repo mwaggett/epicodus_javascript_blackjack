@@ -64,19 +64,20 @@ describe('hitMe', function() {
   it("adds a random card from the deck to the hand", function() {
     var deck = createDeck();
     var hand = createHand(deck);
-    expect(hitMe(hand,deck).length).to.equal(3);
+    hitMe(hand,deck);
+    expect(hand.length).to.equal(3);
   });
 });
 
 describe('containsAce', function() {
-  it("returns true if hand contains ace", function() {
+  it("returns number of aces in hand", function() {
     var hand = [["A", "spades"], ["K", "diamonds"]];
-    expect(containsAce(hand)).to.equal(true);
+    expect(containsAce(hand)).to.equal(1);
   });
 
-  it("returns false if hand doesn't contain ace", function() {
+  it("returns 0 if hand doesn't contain ace", function() {
     var hand = [[2, "spades"], ["K", "diamonds"]];
-    expect(containsAce(hand)).to.equal(false);
+    expect(containsAce(hand)).to.equal(0);
   });
 });
 
@@ -94,6 +95,16 @@ describe('getScore', function() {
   it("counts ace as 1 when otherwise bust", function() {
     var hand = [["A", "spades"], ["K", "diamonds"], [5, "hearts"]];
     expect(getScore(hand)).to.equal(16);
+  });
+
+  it("counts multiple aces differently", function() {
+    var hand = [["A", "spades"], [3, "diamonds"], ["A", "hearts"]];
+    expect(getScore(hand)).to.equal(15);
+  });
+
+  it("counts multiple aces as 1", function() {
+    var hand = [["A", "spades"], [10, "diamonds"], ["A", "hearts"], [9, "diamonds"]];
+    expect(getScore(hand)).to.equal(21);
   });
 });
 

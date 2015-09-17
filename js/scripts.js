@@ -60,14 +60,14 @@ var hitMe = function(hand, deck) {
 }
 
 var containsAce = function(hand) {
-  var ace = false;
+  var aces = 0;
   for (var index in hand) {
     var card = hand[index];
     if (card[0] === "A") {
-      ace = true;
+      aces++;
     }
   }
-  return ace;
+  return aces;
 }
 
 var getScore = function(hand) {
@@ -77,8 +77,10 @@ var getScore = function(hand) {
     var value = cardValues().get(card[0]);
     score += value;
   }
-  if (containsAce(hand) && score > 21) {
-    score -= 10;
+  for (var i = 0; i < containsAce(hand); i++) {
+    if (score > 21) {
+      score -= 10;
+    }
   }
   return score;
 }
@@ -97,11 +99,11 @@ var dealerTurn = function(hand, deck) {
 
 var getWinner = function(dealerHand, playerHand) {
   if (bust(playerHand)) {
-    return dealerHand;
+    return "Dealer";
   } else if (bust(dealerHand) || getScore(playerHand) > getScore(dealerHand)) {
-    return playerHand;
+    return "Player";
   } else if (getScore(dealerHand) > getScore(playerHand)) {
-    return dealerHand;
+    return "Dealer";
   } else {
     return null;
   }
@@ -111,11 +113,14 @@ var getWinner = function(dealerHand, playerHand) {
 
 $(document).ready(function() {
   $("form#play").submit(function(event) {
+    $("#dealer").empty();
+    $("#player").empty();
 
     var deck = createDeck();
     var player = createHand(deck);
     var dealer = createHand(deck);
 
+    $("#dealer").append("<div class=\"card\" id=\"hidden-card\"><p>?</p></div>");
     for(var index = 1; index < dealer.length; index++) {
       var suit = dealer[index][1];
       var value = dealer[index][0];
@@ -133,6 +138,10 @@ $(document).ready(function() {
       var suit = newCard[1];
       var value = newCard[0];
       $("#player").append("<div class=\"card suit"+suit+"\"><p>"+value+"</p></div>");
+      if (bust(player)) {
+        $("#message").text("Bust! Dealer wins!")
+        $('#myModal').modal('show');
+      }
       event.preventDefault();
     });
 
@@ -148,6 +157,17 @@ $(document).ready(function() {
         var value = newCard[0];
         $("#dealer").append("<div class=\"card suit"+suit+"\"><p>"+value+"</p></div>");
       }
+      if (bust(dealer)) {
+        $("#message").text("Bust! Player wins!");
+      } else {
+        var winner = getWinner(dealer, player);
+        if (winner !== null) {
+          $("#message").text("Bust! "+winner+" wins!");
+        } else {
+          $("#message").text("It's a tie!");
+        }
+      }
+      $('#myModal').modal('show');
       event.preventDefault();
     });
 

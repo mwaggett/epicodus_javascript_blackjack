@@ -5,6 +5,7 @@
     <title>Play BlackJack!</title>
     <script src="js/jquery-1.11.3.js"></script>
     <script src="js/scripts.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
     <link href="css/card-styles.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
@@ -20,15 +21,13 @@
           <div class="col-md-6">
             <h2 class="text-center">Dealer Hand</h2>
             <div class="hand new-game" id="dealer">
-              <div class="card" id="hidden-card">
-                <p>?</p>
-              </div>
             </div>
           </div>
           <div class="col-md-6">
             <h2 class="text-center">Player Hand</h2>
             <div class="hand new-game" id="player">
-
+            </div>
+            <div class="hand new-game">
               <form id="hit" class="text-center">
                 <button class="btn btn-success" type="submit">Hit Me!</button>
               </form>
@@ -44,6 +43,27 @@
               <button class="btn btn-info" type="submit">Play BlackJack!</button>
             </form>
           </div>
+
+              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                Launch demo modal
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <h1 class="text-center" id="message"></h1>
+                      <form id="play" class="text-center">
+                        <button class="btn btn-info" type="submit">Play Again!</button>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
       </div>
   </body>
