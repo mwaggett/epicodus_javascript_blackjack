@@ -69,7 +69,22 @@ var getScore = function(hand) {
   return score;
 }
 
+var bust = function(hand) {
+  var score = getScore(hand);
+  return score > 21;
+}
 
+var getWinner = function(dealerHand, playerHand) {
+  if (bust(playerHand)) {
+    return dealerHand;
+  } else if (bust(dealerHand) || getScore(playerHand) > getScore(dealerHand)) {
+    return playerHand;
+  } else if (getScore(dealerHand) > getScore(playerHand)) {
+    return dealerHand;
+  } else {
+    return null;
+  }
+}
 
 
 
