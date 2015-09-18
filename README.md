@@ -1,17 +1,18 @@
-# BlackJack
+# Blackjack
 
-##### _A BlackJack game written in JavaScript, 09/17/2015_
+##### _JavaScript practice for Epicodus, 17 September 2015_
 
-#### By **Molly Waggett and Perry Eising**
+#### By **Perry Eising & Molly Waggett**
 
 ## Description
 
-BlackJack is a blackjack game written in JavaScript. The player can choose to receive more cards, or can stay if they think they have the winning score. The score that gets closest to 21 points without going over wins. The dealer will start playing cards as soon as the player chooses to stay.
+This page allows the user to play a game of Blackjack against the dealer! The player may choose whether to hit or stay. The score that gets closest to 21 points without going over wins. The dealer will take their turn as soon as the player chooses to stay.
 
 ## Setup
 
 * Clone this repository.
-* Load the index.html file into a browser.
+* Open the index.html file in your browser.
+* Go!
 
 ## Technologies Used
 
@@ -34,7 +35,7 @@ BlackJack is a blackjack game written in JavaScript. The player can choose to re
 
 ### Legal
 
-Copyright (c) 2015 **Molly Waggett and Perry Eising**
+Copyright (c) 2015 **Perry Eising & Molly Waggett**
 
 This software is licensed under the MIT license.
 
